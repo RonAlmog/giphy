@@ -46,8 +46,9 @@ const Images = (props: Props) => {
 
   const callAPI = async (searchTerm: string) => {
     try {
+      const key = process.env.key;
       const res = await fetch(
-        `https://api.giphy.com/v1/stickers/search?q=${searchTerm}&limit=10&rating=g&api_key=1bkG7ky5cmw5SLyvNfElcR1iYVzs38Zq`
+        `https://api.giphy.com/v1/stickers/search?q=${searchTerm}&limit=10&rating=g&api_key=${key}`
       );
       const data = await res.json();
 

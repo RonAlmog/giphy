@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: ["api.giphy.com"],
   },
+  env: {
+    key: process.env.GIPHY_API_KEY,
+  },
 };
 
 module.exports = nextConfig;
