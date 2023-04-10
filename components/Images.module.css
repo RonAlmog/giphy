@@ -1,0 +1,36 @@
+/* Container holding the image and the text */
+.container {
+  position: relative;
+  text-align: center;
+  color: black;
+  font-weight: 800;
+}
+
+.bottomCenter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.belowCenter {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.topCenter {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
