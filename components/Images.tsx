@@ -9,6 +9,7 @@ import {
   CardContent,
   Box,
   CardHeader,
+  TextField,
 } from "@mui/material";
 import styles from "./Images.module.css";
 import { useForm } from "react-hook-form";
@@ -16,6 +17,8 @@ import { FormInputText } from "@/components/form/FormInputText";
 import { FormInputDropdown } from "@/components/form/FormInputDropdown";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 type Props = {};
 
@@ -30,6 +33,16 @@ const Images = (props: Props) => {
     { value: "2", text: "On top of image - center bottom" },
     { value: "3", text: "Below image - center" },
   ];
+
+  const validationSchema = Yup.object().shape({
+    search: Yup.string().required("Search term is required"),
+    title: Yup.string()
+      .required("Title is required")
+      .min(6, "Title must be at least 6 characters")
+      .max(20, "Title must not exceed 20 characters"),
+    location: Yup.string().required("Location is required"),
+  });
+
   interface IFormInput {
     search: string;
     title: string;
@@ -41,8 +54,19 @@ const Images = (props: Props) => {
     title: "",
     location: "1",
   };
-  const methods = useForm<IFormInput>({ defaultValues: defaultValues });
-  const { handleSubmit, reset, control, setValue, watch } = methods;
+  const methods = useForm<IFormInput>({
+    defaultValues: defaultValues,
+    resolver: yupResolver(validationSchema),
+  });
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+    control,
+    setValue,
+    watch,
+  } = methods;
 
   const callAPI = async (searchTerm: string) => {
     try {
